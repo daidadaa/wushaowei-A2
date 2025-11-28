@@ -8,10 +8,7 @@ public class Ride implements RideInterface {
     private int minHeight;
     private Employee rideOperator;
 
-    // Part 3 Queue
     private Queue<Visitor> waitingQueue;
-
-    // Part 4A Ride History
     private LinkedList<Visitor> rideHistory;
 
     public Ride() {
@@ -27,7 +24,6 @@ public class Ride implements RideInterface {
         rideHistory = new LinkedList<>();
     }
 
-    // Getters
     public String getRideName() {
         return rideName;
     }
@@ -92,7 +88,7 @@ public class Ride implements RideInterface {
     @Override
     public boolean checkVisitorFromHistory(Visitor v) {
         boolean exists = rideHistory.contains(v);
-        System.out.println(v.getName() + (exists ? " is" : " is NOT") + " in the ride history.");
+        System.out.println(v.getName() + (exists ? " is" : " is NOT") + " in ride history.");
         return exists;
     }
 
@@ -111,7 +107,6 @@ public class Ride implements RideInterface {
 
         System.out.println("Ride history:");
 
-        // MUST use Iterator (Rubric 要求，不然扣分)
         Iterator<Visitor> it = rideHistory.iterator();
         while (it.hasNext()) {
             Visitor v = it.next();
@@ -119,8 +114,30 @@ public class Ride implements RideInterface {
         }
     }
 
+    // Part 4B — Sorting
+    @Override
+    public void sortRideHistory() {
+        System.out.println("Sorting ride history by age then name...");
+        VisitorComparator comp = new VisitorComparator();
+        rideHistory.sort(comp);
+    }
+
+    // Part 5 — Running One Cycle
     @Override
     public void runOneCycle() {
-        // Implement in Day 3
+        System.out.println("\nRunning one cycle of the ride...");
+
+        if (waitingQueue.isEmpty()) {
+            System.out.println("No visitors in queue. Cannot run cycle.");
+            return;
+        }
+
+        // First visitor gets on the ride
+        Visitor v = waitingQueue.poll();
+        System.out.println(v.getName() + " has completed the ride!");
+
+        // Add visitor to ride history
+        rideHistory.add(v);
+        System.out.println(v.getName() + " added to ride history.");
     }
 }
