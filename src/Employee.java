@@ -1,39 +1,24 @@
+// Employee.java
 public class Employee extends Person {
-
-    private String employeeId;
+    private String staffId;
     private String role;
 
-    public Employee() {
-        super();
-    }
+    public Employee() { super(); this.staffId = ""; this.role = ""; }
 
-    public Employee(String name, int age, String gender,
-                    String employeeId, String role) {
-        super(name, age, gender);
-        this.employeeId = employeeId;
+    public Employee(String id, String name, int age, String staffId, String role) {
+        super(id, name, age);
+        this.staffId = staffId;
         this.role = role;
     }
 
-    public String getEmployeeId() {
-        return employeeId;
-    }
+    public String getStaffId() { return staffId; }
+    public void setStaffId(String staffId) { this.staffId = staffId; }
 
-    public void setEmployeeId(String employeeId) {
-        this.employeeId = employeeId;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
+    public String getRole() { return role; }
+    public void setRole(String role) { this.role = role; }
 
     @Override
     public String toString() {
-        return "[Employee] " + super.toString() +
-                " | ID: " + employeeId +
-                " | Role: " + role;
+        return String.format("%s StaffID:%s Role:%s", super.toString(), staffId, role);
     }
 }

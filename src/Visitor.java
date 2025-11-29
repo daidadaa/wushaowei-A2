@@ -1,39 +1,37 @@
+// Visitor.java
 public class Visitor extends Person {
-
     private String ticketType;
-    private int height;
+    private double height;
 
-    public Visitor() {
-        super();
-    }
+    public Visitor() { super(); this.ticketType = ""; this.height = 0.0; }
 
-    public Visitor(String name, int age, String gender,
-                   String ticketType, int height) {
-        super(name, age, gender);
+    public Visitor(String id, String name, int age, String ticketType, double height) {
+        super(id, name, age);
         this.ticketType = ticketType;
         this.height = height;
     }
 
-    public String getTicketType() {
-        return ticketType;
-    }
+    public String getTicketType() { return ticketType; }
+    public void setTicketType(String ticketType) { this.ticketType = ticketType; }
 
-    public void setTicketType(String ticketType) {
-        this.ticketType = ticketType;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
-    }
+    public double getHeight() { return height; }
+    public void setHeight(double height) { this.height = height; }
 
     @Override
     public String toString() {
-        return "[Visitor] " + super.toString() +
-                " | Ticket: " + ticketType +
-                " | Height: " + height + "cm";
+        return String.format("%s Ticket:%s Height:%.2fm", super.toString(), ticketType, height);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Visitor v = (Visitor) o;
+        return this.getId() != null && this.getId().equals(v.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return (getId() == null) ? 0 : getId().hashCode();
     }
 }
